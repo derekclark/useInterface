@@ -12,7 +12,7 @@ Let us say we have a UserRegistrationService, which registers a new user in our
 
 THE WRONG WAY
 If we were not using interface, the UserRegistrationService may be implemented with two functions saveToXML() and saveToDatabase().
-
+```
 	public class UserRegistrationService {
     public void saveToXML(UserInfo userInfo) {
         //save to xml using service exposed by Repository layer
@@ -21,9 +21,10 @@ If we were not using interface, the UserRegistrationService may be implemented w
         //save to db using service exposed by Repository layer
     }
 }
+```
 In this case, the UserRegistrationController should be aware of the concrete implementation of these two functions in UserRegistrationService to use them.
 
-	//Controller becomes complicated when additional features are required
+```
 public class UserRegistrationController {
     //Controller should be aware of the implementation when no Interface is used
     UserRegistrationService userRegistrationService = new UserRegistrationService();
@@ -37,6 +38,7 @@ public class UserRegistrationController {
         userRegistrationService.saveToDatabase();
     }
 }
+```
 If an additional functionality to save the information as JSON is required then you will have to add a new function saveToJson() in the Service class as well as make changes in the Controller. This adds lots of complication to maintenance of our huge application with hundreds of controllers and services.
 
 THE RIGHT WAY
