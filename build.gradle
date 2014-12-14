@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+      mavenCentral()
+    }
+    dependencies {
+       classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.9.RELEASE")
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.7
+version = '1.0'
+jar {
+    baseName = 'jaxws-client-tdd'
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.easytesting:fest-assert:1.4'
+    testCompile 'com.googlecode.catch-exception:catch-exception:1.2.0'
+    testCompile 'org.mockito:mockito-core:1.8.5'
+    testCompile 'org.assertj:assertj-core:1.2.0'
+    compile("org.springframework.boot:spring-boot-starter-web") {
+       exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
